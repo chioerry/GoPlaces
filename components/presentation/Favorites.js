@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default class Favorites from React.Component{
+export default class Favorites extends React.Component{
 	constructor(props){
 		super(props);
 	}
-	render(){
+	render = () => {
 		return(
 				<div>
 					<h1>Favs Under Construction.....</h1>

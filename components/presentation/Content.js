@@ -12,7 +12,7 @@ export default class Content extends React.Component{
     console.log("Inside Results Constructor"); 
   }
   
-  render()
+  render = () =>
   {
     
     return(
@@ -26,9 +26,8 @@ export default class Content extends React.Component{
           <img src={this.props.img} />
         </GridTile>
       
-        );  
+        );           
+  }
 
-  
-          
-  }
-  }
+}
+

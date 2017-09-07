@@ -9,19 +9,15 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 export default class Containers extends React.Component{
 
  
-  constructor(props){
-
+  constructor(props) {
     super(props);
     console.log("Inside Results Constructor"+this.props.vars);
     this.state={
       result:[]
     }
   }
-
-
     
-  render()
-  {
+  render() {
     const styles = {
   root: {
     display: 'flex',
@@ -29,12 +25,12 @@ export default class Containers extends React.Component{
     justifyContent: 'space-around',
   },
   gridList: {
-    width: 1200,
-    height: 680,
+    width: 1600,
+    height: 580,
     overflowY: 'auto',
   },
 };
-        var results = this.props.vars.map(function(element){
+        var results = this.props.vars.map(function(element) {
                   
                 return <Content name={element.name} Address={element.vicinity} img={element.icon} />;
       }) 

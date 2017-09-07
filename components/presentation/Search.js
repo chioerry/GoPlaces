@@ -2,14 +2,39 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 
-export default class Search extends React.Component{
-	constructor(props)
-	{
+let citys = '';
+let types = '';
+export default class Search extends React.Component {
+	constructor(props) {
 		super(props);
-		this.test = this.test.bind(this);
 		this.state={data:null};
+		this.test = this.test.bind(this);
 	}
-	render(){
+
+	componentWillReceiveProps(newProps) {
+		console.log("componentWillReceiveProps is called");
+	}
+
+	shouldComponentUpdate(newProps, newState) {
+		if (this.state.citys !== newState.citys || this.state.types !== newState.types) {
+			return true;
+		}
+		else {
+			return false
+		}
+	}
+
+	componentWillUpdate(nextProps, nextState){
+		this.test(nextState.citys,nextState.types);
+
+	}
+
+	params = () => {
+		this.setState({citys:this.refs.v1.getValue()});
+		this.setState({types:this.refs.v2.getValue()});
+	}
+
+	render() {
 		return(
 			<div>
 
@@ -26,22 +51,23 @@ export default class Search extends React.Component{
 			floatingLabelText="Enter Type"
 			style={{width:'35%', marginLeft:100}}/>
 
-			<button onClick = {this.test}>Search</button>
+			<button onClick = {this.params}>Search</button>
 
 			</div>
 			);
 	}
+		
 
-	test(){
-		let citys = this.refs.v1.getValue();
-		let types = this.refs.v2.getValue();
+	test(city,type) {
+		
+		
 		const apikey = 'AIzaSyBjEsJyeUpD0LsClizd6K_fu5BsQDVmxXY';
 
-		let url1 = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=12.9716,77.5946&radius=500&type='+citys;
-		let url2 = '&keyword='+types+'&key='+apikey;
+		let url1 = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=12.9716,77.5946&radius=500&type='+city;
+		let url2 = '&keyword='+type+'&key='+apikey;
 		let url3 = url1+url2;
-
 		console.log(url3);
+
 		axios.get(url3)
 		.then((response) => {
 			this.setState({
@@ -70,6 +96,7 @@ export default class Search extends React.Component{
 		.catch( (error) => {
 			console.log(error);
 		});  
-
+		
 	}
+	
 }
